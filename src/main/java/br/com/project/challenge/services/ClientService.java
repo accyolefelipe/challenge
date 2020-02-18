@@ -23,4 +23,26 @@ public class ClientService {
 		Optional<Client> obj = clientRepository.findById(id);
 		return obj.get();
 	}
+	
+	public Client insert(Client obj) {
+		return clientRepository.save(obj);
+
+	}
+	
+	public void delete(Long id) {
+		clientRepository.deleteById(id);
+	}
+	
+	public Client update(Long id, Client obj) {
+		Client entity = clientRepository.getOne(id);
+		updateData(entity, obj);
+		return clientRepository.save(entity);
+	}
+
+	private void updateData(Client entity, Client obj) {
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setPhone(obj.getPhone());
+
+	}
 }

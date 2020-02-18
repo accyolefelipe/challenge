@@ -23,4 +23,15 @@ public class RentService {
 		Optional<Rent> obj = rentRepository.findById(id);
 		return obj.get();
 	}
+
+	public Rent insert(Rent obj) {
+		return rentRepository.save(obj);
+
+	}
+	
+	public void delete(Long id) {
+		rentRepository.deleteById(id);
+	}
+	
+	
 }

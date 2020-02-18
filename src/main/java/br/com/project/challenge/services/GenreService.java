@@ -23,4 +23,13 @@ public class GenreService {
 		Optional<Genre> obj = genreRepository.findById(id);
 		return obj.get();
 	}
+	
+	public Genre insert(Genre obj) {
+		return genreRepository.save(obj);
+
+	}
+	
+	public void delete(Long id) {
+		genreRepository.deleteById(id);
+	}
 }

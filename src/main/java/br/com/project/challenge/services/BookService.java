@@ -23,4 +23,13 @@ public class BookService {
 		Optional<Book> obj = bookRepository.findById(id);
 		return obj.get();
 	}
+
+	public Book insert(Book obj) {
+		return bookRepository.save(obj);
+
+	}
+	
+	public void delete(Long id) {
+		bookRepository.deleteById(id);
+	}
 }
