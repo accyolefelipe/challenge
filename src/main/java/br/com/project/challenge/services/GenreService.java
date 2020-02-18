@@ -32,4 +32,14 @@ public class GenreService {
 	public void delete(Long id) {
 		genreRepository.deleteById(id);
 	}
+	
+	public Genre update(Long id, Genre obj) {
+		Genre entity = genreRepository.getOne(id);
+		updateData(entity, obj);
+		return genreRepository.save(entity);
+	}
+
+	private void updateData(Genre entity, Genre obj) {
+		entity.setName(obj.getName());
+	}
 }

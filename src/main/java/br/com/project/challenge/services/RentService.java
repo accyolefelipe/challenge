@@ -33,5 +33,15 @@ public class RentService {
 		rentRepository.deleteById(id);
 	}
 	
+	public Rent update(Long id, Rent obj) {
+		Rent entity = rentRepository.getOne(id);
+		updateData(entity, obj);
+		return rentRepository.save(entity);
+	}
+
+	private void updateData(Rent entity, Rent obj) {
+		entity.setRentStatus(obj.getRentStatus());
+	}
+	
 	
 }

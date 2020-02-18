@@ -32,4 +32,18 @@ public class BookService {
 	public void delete(Long id) {
 		bookRepository.deleteById(id);
 	}
+	
+	public Book update(Long id, Book obj) {
+		Book entity = bookRepository.getOne(id);
+		updateData(entity, obj);
+		return bookRepository.save(entity);
+	}
+
+	private void updateData(Book entity, Book obj) {
+		entity.setName(obj.getName());
+		entity.setAuthor(obj.getAuthor());;
+		entity.setRentPrice(obj.getRentPrice());
+		entity.setImgUrl(obj.getImgUrl());
+
+	}
 }
