@@ -20,12 +20,12 @@ public class ClientService {
 	}
 
 	public Client findById(Long id) {
-		Optional<Client> obj = clientRepository.findById(id);
-		return obj.get();
+		Optional<Client> client = clientRepository.findById(id);
+		return client.get();
 	}
 	
-	public Client insert(Client obj) {
-		return clientRepository.save(obj);
+	public Client insert(Client client) {
+		return clientRepository.save(client);
 
 	}
 	
@@ -33,16 +33,16 @@ public class ClientService {
 		clientRepository.deleteById(id);
 	}
 	
-	public Client update(Long id, Client obj) {
+	public Client update(Long id, Client client) {
 		Client entity = clientRepository.getOne(id);
-		updateData(entity, obj);
+		updateData(entity, client);
 		return clientRepository.save(entity);
 	}
 
-	private void updateData(Client entity, Client obj) {
-		entity.setName(obj.getName());
-		entity.setEmail(obj.getEmail());
-		entity.setPhone(obj.getPhone());
+	private void updateData(Client entity, Client client) {
+		entity.setName(client.getName());
+		entity.setEmail(client.getEmail());
+		entity.setPhone(client.getPhone());
 
 	}
 }

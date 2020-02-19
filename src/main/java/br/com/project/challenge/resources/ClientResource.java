@@ -33,15 +33,15 @@ public class ClientResource {
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Client> findById(@PathVariable Long id) {
-		Client obj = clientService.findById(id);
-		return ResponseEntity.ok().body(obj);
+		Client client = clientService.findById(id);
+		return ResponseEntity.ok().body(client);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Client> insert(@RequestBody Client obj){
-		obj = clientService.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).body(obj);
+	public ResponseEntity<Client> insert(@RequestBody Client client){
+		client = clientService.insert(client);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(client.getId()).toUri();
+		return ResponseEntity.created(uri).body(client);
 	}
 	
 	@DeleteMapping(value = "/{id}")
@@ -52,8 +52,8 @@ public class ClientResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody Client obj){
-		obj = clientService.update(id, obj);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody Client client){
+		client = clientService.update(id, client);
+		return ResponseEntity.ok().body(client);
 	}
 }

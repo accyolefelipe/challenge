@@ -33,15 +33,15 @@ public class GenreResource {
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Genre> findById(@PathVariable Long id) {
-		Genre obj = genreService.findById(id);
-		return ResponseEntity.ok().body(obj);
+		Genre genre = genreService.findById(id);
+		return ResponseEntity.ok().body(genre);
 	}
 
 	@PostMapping
-	public ResponseEntity<Genre> insert(@RequestBody Genre obj) {
-		obj = genreService.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).body(obj);
+	public ResponseEntity<Genre> insert(@RequestBody Genre genre) {
+		genre = genreService.insert(genre);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(genre.getId()).toUri();
+		return ResponseEntity.created(uri).body(genre);
 	}
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){
@@ -51,9 +51,9 @@ public class GenreResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Genre> update(@PathVariable Long id, @RequestBody Genre obj){
-		obj = genreService.update(id, obj);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<Genre> update(@PathVariable Long id, @RequestBody Genre genre){
+		genre = genreService.update(id, genre);
+		return ResponseEntity.ok().body(genre);
 	}
 
 }

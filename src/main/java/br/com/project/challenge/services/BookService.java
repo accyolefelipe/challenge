@@ -20,12 +20,12 @@ public class BookService {
 	}
 
 	public Book findById(Long id) {
-		Optional<Book> obj = bookRepository.findById(id);
-		return obj.get();
+		Optional<Book> book = bookRepository.findById(id);
+		return book.get();
 	}
 
-	public Book insert(Book obj) {
-		return bookRepository.save(obj);
+	public Book insert(Book book) {
+		return bookRepository.save(book);
 
 	}
 	
@@ -33,17 +33,17 @@ public class BookService {
 		bookRepository.deleteById(id);
 	}
 	
-	public Book update(Long id, Book obj) {
+	public Book update(Long id, Book book) {
 		Book entity = bookRepository.getOne(id);
-		updateData(entity, obj);
+		updateData(entity, book);
 		return bookRepository.save(entity);
 	}
 
-	private void updateData(Book entity, Book obj) {
-		entity.setName(obj.getName());
-		entity.setAuthor(obj.getAuthor());;
-		entity.setRentPrice(obj.getRentPrice());
-		entity.setImgUrl(obj.getImgUrl());
+	private void updateData(Book entity, Book book) {
+		entity.setName(book.getName());
+		entity.setAuthor(book.getAuthor());;
+		entity.setRentPrice(book.getRentPrice());
+		entity.setImgUrl(book.getImgUrl());
 
 	}
 }

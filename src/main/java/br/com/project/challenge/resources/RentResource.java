@@ -32,16 +32,16 @@ public class RentResource {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Rent> findById(@PathVariable Long id) {
-		Rent obj = rentService.findById(id);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<Rent> findById(@PathVariable Long id) throws Exception {
+		Rent rent = rentService.findById(id);
+		return ResponseEntity.ok().body(rent);
 	}
 
 	@PostMapping
-	public ResponseEntity<Rent> insert(@RequestBody Rent obj) {
-		obj = rentService.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).body(obj);
+	public ResponseEntity<Rent> insert(@RequestBody Rent rent) {
+		rent = rentService.insert(rent);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(rent.getId()).toUri();
+		return ResponseEntity.created(uri).body(rent);
 	}
 	
 	@DeleteMapping(value = "/{id}")
@@ -51,10 +51,17 @@ public class RentResource {
 
 	}
 	
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<Rent> update(@PathVariable Long id, @RequestBody Rent obj){
-		obj = rentService.update(id, obj);
-		return ResponseEntity.ok().body(obj);
+	//@PutMapping(value = "/{id}")
+	//public ResponseEntity<Rent> update(@PathVariable Long id, @RequestBody Rent rent){
+	//	rent = rentService.update(id, rent);
+	//	return ResponseEntity.ok().body(rent);
+	//}
+	
+	@PutMapping(value = "/delivery/{id}")
+	public ResponseEntity<Rent> delivery(@PathVariable Long id) throws Exception{
+		Rent rent = rentService.delivery(id);
+		return ResponseEntity.ok().body(rent);
 	}
+	
 
 }

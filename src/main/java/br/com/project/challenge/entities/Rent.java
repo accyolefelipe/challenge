@@ -18,8 +18,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import br.com.project.challenge.entities.enums.RentStatus;
-
 @Entity
 @Table(name = "tb_rent")
 public class Rent implements Serializable {
@@ -30,9 +28,12 @@ public class Rent implements Serializable {
 	private Long id;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-	private Instant moment;
-
-	private Integer rentStatus;
+	private Instant rentDay;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+	private Instant rentExpirationDay;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+	private Instant rentDelivery;
 
 	@ManyToOne
 	@JoinColumn(name = "client_id")
@@ -48,12 +49,13 @@ public class Rent implements Serializable {
 
 	}
 
-	public Rent(Long id, Instant moment, RentStatus rentStatus, Client client) {
+	public Rent(Long id, Client client, Instant rentDay, Instant rentExpirationDay, Instant rentDelivery) {
 		super();
 		this.id = id;
-		this.moment = moment;
-		setRentStatus(rentStatus);
 		this.client = client;
+		this.rentDay = rentDay;
+		this.rentExpirationDay = rentExpirationDay;
+		this.rentDelivery = rentDelivery;
 	}
 
 	public Long getId() {
@@ -64,23 +66,14 @@ public class Rent implements Serializable {
 		this.id = id;
 	}
 
-	public Instant getMoment() {
-		return moment;
+	public Instant getRentDay() {
+		return rentDay;
 	}
 
-	public void setMoment(Instant moment) {
-		this.moment = moment;
+	public void setRentDay(Instant rentDay) {
+		this.rentDay = rentDay;
 	}
 
-	public RentStatus getRentStatus() {
-		return RentStatus.valueOf(rentStatus);
-	}
-
-	public void setRentStatus(RentStatus rentStatus) {
-		if (rentStatus != null) {
-			this.rentStatus = rentStatus.getCode();
-		}
-	}
 	public Set<RentItem> getItems(){
 		return items;
 	}
@@ -101,6 +94,22 @@ public class Rent implements Serializable {
 		this.payment = payment;
 	}
 	
+	public Instant getRentDelivery() {
+		return rentDelivery;
+	}
+
+	public void setRentDelivery(Instant rentDelivery) {
+		this.rentDelivery = rentDelivery;
+	}
+	
+	public Instant getRentExpirationDay() {
+		return rentExpirationDay;
+	}
+
+	public void setRentExpirationDay(Instant rentExpirationDay) {
+		this.rentExpirationDay = rentExpirationDay;
+	}
+
 	public Double getTotal() {
 		double sum = 0.0;
 		for (RentItem x : items) {

@@ -35,6 +35,9 @@ public class Book implements Serializable {
 	
 	@OneToMany(mappedBy = "id.book")
 	private Set<RentItem> items = new HashSet<>();
+	
+	@OneToMany(mappedBy = "id.book")
+	private Set<ReservationItem> resItems = new HashSet<>();
 
 	public Book() {
 
@@ -99,6 +102,15 @@ public class Book implements Serializable {
 		Set<Rent> set = new HashSet<>();
 		for (RentItem x : items) {
 			set.add(x.getRent());
+		}
+		return set;
+	}
+	
+	@JsonIgnore
+	public Set<Reservation> getReservations(){
+		Set<Reservation> set = new HashSet<>();
+		for (ReservationItem x : resItems) {
+			set.add(x.getReservation());
 		}
 		return set;
 	}

@@ -20,12 +20,12 @@ public class GenreService {
 	}
 
 	public Genre findById(Long id) {
-		Optional<Genre> obj = genreRepository.findById(id);
-		return obj.get();
+		Optional<Genre> genre = genreRepository.findById(id);
+		return genre.get();
 	}
 	
-	public Genre insert(Genre obj) {
-		return genreRepository.save(obj);
+	public Genre insert(Genre genre) {
+		return genreRepository.save(genre);
 
 	}
 	
@@ -33,13 +33,13 @@ public class GenreService {
 		genreRepository.deleteById(id);
 	}
 	
-	public Genre update(Long id, Genre obj) {
+	public Genre update(Long id, Genre genre) {
 		Genre entity = genreRepository.getOne(id);
-		updateData(entity, obj);
+		updateData(entity, genre);
 		return genreRepository.save(entity);
 	}
 
-	private void updateData(Genre entity, Genre obj) {
-		entity.setName(obj.getName());
+	private void updateData(Genre entity, Genre genre) {
+		entity.setName(genre.getName());
 	}
 }

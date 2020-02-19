@@ -8,37 +8,36 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.com.project.challenge.entities.pk.RentItemPk;
-
+import br.com.project.challenge.entities.pk.ReservationItemPk;
 
 @Entity
-@Table(name = "tb_rent_item")
-public class RentItem implements Serializable{
+@Table(name = "tb_reservation_item")
+public class ReservationItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private RentItemPk id = new RentItemPk();
+	private ReservationItemPk id = new ReservationItemPk();
 
 	private Double price;
 
-	public RentItem() {
+	public ReservationItem() {
 
 	}
 
-	public RentItem(Rent rent, Book book, Double price) {
+	public ReservationItem(Reservation reservation, Book book, Double price) {
 		super();
-		id.setRent(rent);
+		id.setReservation(reservation);
 		id.setBook(book);
 		this.price = price;
 	}
-	
+
 	@JsonIgnore
-	public Rent getRent() {
-		return id.getRent();
+	public Reservation getReservation() {
+		return id.getReservation();
 	}
 
-	public void setRent(Rent rent) {
-		id.setRent(rent);
+	public void setReservation(Reservation reservation) {
+		id.setReservation(reservation);
 	}
 
 	public Book getBook() {
@@ -73,7 +72,7 @@ public class RentItem implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RentItem other = (RentItem) obj;
+		ReservationItem other = (ReservationItem) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

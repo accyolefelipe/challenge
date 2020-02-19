@@ -28,6 +28,10 @@ public class Client implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private List<Rent> rents = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "client")
+	private List<Reservation> reservations = new ArrayList<>();
 
 	public Client() {
 
@@ -75,6 +79,10 @@ public class Client implements Serializable {
 
 	public List<Rent> getRents() {
 		return rents;
+	}
+	
+	public List<Reservation> getReservations(){
+		return reservations;
 	}
 
 	@Override

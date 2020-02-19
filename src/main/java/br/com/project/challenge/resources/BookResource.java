@@ -33,15 +33,15 @@ public class BookResource {
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Book> findById(@PathVariable Long id) {
-		Book obj = bookService.findById(id);
-		return ResponseEntity.ok().body(obj);
+		Book book = bookService.findById(id);
+		return ResponseEntity.ok().body(book);
 	}
 
 	@PostMapping
-	public ResponseEntity<Book> insert(@RequestBody Book obj) {
-		obj = bookService.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).body(obj);
+	public ResponseEntity<Book> insert(@RequestBody Book book) {
+		book = bookService.insert(book);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(book.getId()).toUri();
+		return ResponseEntity.created(uri).body(book);
 	}
 
 	@DeleteMapping(value = "/{id}")
@@ -52,9 +52,9 @@ public class BookResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Book> update(@PathVariable Long id, @RequestBody Book obj){
-		obj = bookService.update(id, obj);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<Book> update(@PathVariable Long id, @RequestBody Book book){
+		book = bookService.update(id, book);
+		return ResponseEntity.ok().body(book);
 	}
 
 }
