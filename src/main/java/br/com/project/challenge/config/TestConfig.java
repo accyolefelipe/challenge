@@ -80,6 +80,7 @@ public class TestConfig implements CommandLineRunner {
 		Client c2 = new Client(null, "Jiban", "jiban@tokusatsu.com", "88888888");
 		Client c3 = new Client(null, "test3", "teste3@gmail.com", "111");
 		Client c4 = new Client(null, "test4", "teste4@gmail.com", "222");
+		
 		Instant data1 = Instant.parse("2019-06-20T19:53:07Z");
 		Instant data2 = Instant.parse("2019-06-28T19:53:07Z");
 		
@@ -101,7 +102,7 @@ public class TestConfig implements CommandLineRunner {
 		RentItem ri3 = new RentItem(r2, b2, b2.getRentPrice());
 
 		ReservationItem resi1 = new ReservationItem(res1, b4, b4.getRentPrice());
-		ReservationItem resi2 = new ReservationItem(res1, b5, b5.getRentPrice());
+		ReservationItem resi2 = new ReservationItem(res2, b5, b5.getRentPrice());
 
 		rentItemRepository.saveAll(Arrays.asList(ri1, ri2, ri3));
 		reservationItemRepository.saveAll(Arrays.asList(resi1, resi2));
