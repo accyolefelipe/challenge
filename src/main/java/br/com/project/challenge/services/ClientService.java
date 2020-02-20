@@ -3,6 +3,8 @@ package br.com.project.challenge.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -27,26 +29,30 @@ public class ClientService {
 		Optional<Client> client = clientRepository.findById(id);
 		return client.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
-	
+
 	public Client insert(Client client) {
 		return clientRepository.save(client);
 
 	}
-	
+
 	public void delete(Long id) {
 		try {
-		clientRepository.deleteById(id);
-		}  catch (EmptyResultDataAccessException e) {
+			clientRepository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException(e);
 		} catch (DataIntegrityViolationException e) {
 			throw new DatabaseException(e.getMessage());
 		}
 	}
-	
+
 	public Client update(Long id, Client client) {
-		Client entity = clientRepository.getOne(id);
-		updateData(entity, client);
-		return clientRepository.save(entity);
+		try {
+			Client entity = clientRepository.getOne(id);
+			updateData(entity, client);
+			return clientRepository.save(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	private void updateData(Client entity, Client client) {
