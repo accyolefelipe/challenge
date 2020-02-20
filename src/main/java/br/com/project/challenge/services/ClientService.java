@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import br.com.project.challenge.entities.Client;
 import br.com.project.challenge.repositories.ClientRepository;
+import br.com.project.challenge.services.exceptions.DatabaseException;
 import br.com.project.challenge.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -31,7 +34,13 @@ public class ClientService {
 	}
 	
 	public void delete(Long id) {
+		try {
 		clientRepository.deleteById(id);
+		}  catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException(e);
+		} catch (DataIntegrityViolationException e) {
+			throw new DatabaseException(e.getMessage());
+		}
 	}
 	
 	public Client update(Long id, Client client) {
